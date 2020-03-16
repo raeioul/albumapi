@@ -5,6 +5,7 @@ const AlbumSchema = new mongoose.Schema({
   rating: Number,
   title: String,
   year: Date,
+  artists:[]
 });
 
 export const Album = mongoose.model("Album", AlbumSchema);
