@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-import { Controller } from './main.controller';
+import { Router } from './routes/router';
 import { MONGO_URL } from './constants/albumApi.constants';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -7,13 +7,13 @@ import mongoose from 'mongoose';
 
 class App {
   public app: Application;
-  public albumController: Controller;
+  public router: Router;
 
   constructor() {
     this.app = express();
     this.setConfig();
     this.setMongoConfig();
-    this.albumController = new Controller(this.app);
+    this.router = new Router(this.app);
   }
 
   private setConfig() {
