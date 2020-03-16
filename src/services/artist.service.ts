@@ -24,26 +24,29 @@ export class ArtistService {
   }
 
   public addNewArtist(req: Request, res: Response) {
-    const newArtist = new Artist({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      birthDate: req.body.birthDate
-    });
-
-    Album.findById(req.body.id, (error: Error, album: any) => {
-      album.artists.push(newArtist);
-      album.save();
-    });
-    newArtist.save((error: Error, album: MongooseDocument) => {
-      if (error) {
-        res.send(error);
-      }
-      const message = newArtist
-        ? "Artist added successfully"
-        : "Album not found :(";
-      newArtist.save();
-      res.send(message);
-    });
+    if(req.body.id==null){
+      res.send('We need and album ID first to add an artist');
+    } else {
+      const newArtist = new Artist({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        birthDate: req.body.birthDate
+      });
+      Album.findById(req.body.id, (error: Error, album: any) => {
+        album.artists.push(newArtist);
+        album.save();
+      });
+      newArtist.save((error: Error, album: MongooseDocument) => {
+        if (error) {
+          res.send(error);
+        }
+        const message = newArtist
+          ? "Artist added successfully"
+          : "Artist not found :(";
+        newArtist.save();
+        res.send(message);
+      });
+    }
   }
 
   public updateArtist(req: Request, res: Response) {
