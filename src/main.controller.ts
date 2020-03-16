@@ -1,5 +1,5 @@
-import { Application } from 'express';
-import { AlbumService } from './services/album.service';
+import { Application } from "express";
+import { AlbumService } from "./services/album.service";
 
 export class Controller {
   private albumService: AlbumService;
@@ -10,6 +10,6 @@ export class Controller {
   }
 
   public routes() {
-    this.app.route('/').get(this.albumService.welcomeMessage);
+    this.app.route("/").get(this.albumService.welcomeMessage);
   }
 }
