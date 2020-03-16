@@ -1,1 +1,1 @@
-# ambumApi
+# albumApi
